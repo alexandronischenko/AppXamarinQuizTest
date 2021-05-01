@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FirstApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Welcome to WhyULearn!"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <!--<ResourceDictionary>
+            <Style x:Key="CommonStyle">
+                <Setter Property=""></Setter>
+            </Style>
+        </ResourceDictionary>-->
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Column="2"
+                Margin="0,40,0,0"
+                FontSize="Title"
+                HorizontalOptions="FillAndExpand"
+                Text="Войдите в приложение, чтобы продолжить!"
+                TextColor="Black" />
+            <Label
+                Margin="0,0"
+                FontSize="Small"
+                HorizontalOptions="FillAndExpand"
+                Text="Все знают, что ты только приступишь"
+                TextColor="Black" />
+
+            <Label
+                Margin="0,50,0,0"
+                Text="Электронная почта:"
+                TextColor="Black" />
+            <Entry
+                Margin="0,0,0,0"
+                FontSize="Medium"
+                Keyboard="Email"
+                Placeholder="Александр@mail.ru"
+                PlaceholderColor="DarkGray"
+                Text="{Binding Email}"
+                TextColor="Black" />
+
+            <Label Text="Пароль:" TextColor="Black" />
+            <Entry
+                FontSize="Medium"
+                IsPassword="True"
+                Placeholder="12345678"
+                PlaceholderColor="DarkGray"
+                Text="{Binding Password}"
+                TextColor="Black" />
+
+            <Button Margin="30,50,30,30" Text="Войти" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

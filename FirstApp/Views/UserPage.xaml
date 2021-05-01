@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstApp.Views.UserPage" Title="Информация о друге">
+    <StackLayout BackgroundColor="Azure" >
+        <StackLayout x:Name="userStack" Margin="20">
+            <Label Text="Имя" TextColor="Black"/>
+            <Entry Text="{Binding Name}" FontSize="Medium" PlaceholderColor="DarkGray" Placeholder="Александр" TextColor="Black"/>
+            <Label Text="Электронная почта" TextColor="Black"/>
+            <Entry Text="{Binding Email}" FontSize="Medium" PlaceholderColor="DarkGray" Placeholder="Александр@mail.ru" TextColor="Black"/>
+            <Label Text="Телефон" TextColor="Black"/>
+            <Entry Text="{Binding Phone}" FontSize="Medium" PlaceholderColor="DarkGray" Placeholder="+79999999999" TextColor="Black"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,10">
+            <Button Text="Добавить" Command="{Binding ListViewModel.SaveUserCommand}" CommandParameter="{Binding}" />
+            <Button Text="Удалить" Command="{Binding ListViewModel.DeleteUserCommand}" CommandParameter="{Binding}" />
+            <Button Text="Назад" Command="{Binding ListViewModel.BackCommand}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

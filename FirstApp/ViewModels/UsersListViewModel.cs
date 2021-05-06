@@ -16,7 +16,7 @@ namespace FirstApp.ViewModels
         public ICommand DeleteUserCommand { protected set; get; }
         public ICommand SaveUserCommand { protected set; get; }
         public ICommand BackCommand { protected set; get; }
-        UserViewModel selectedUser;
+        UserViewModel _selectedUser;
 
         public INavigation Navigation { get; set; }
 
@@ -31,13 +31,13 @@ namespace FirstApp.ViewModels
 
         public UserViewModel SelectedUser
         {
-            get { return selectedUser; }
+            get { return _selectedUser; }
             set
             {
-                if (selectedUser != value)
+                if (_selectedUser != value)
                 {
                     UserViewModel tempUser = value;
-                    selectedUser = null;
+                    _selectedUser = null;
                     OnPropertyChanged("SelectedUser");
                     Navigation.PushAsync(new UserPage(tempUser));
                 }
@@ -45,8 +45,7 @@ namespace FirstApp.ViewModels
         }
         protected void OnPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
         private async void CreateUser()
@@ -59,8 +58,7 @@ namespace FirstApp.ViewModels
         }
         private void SaveUser(object userObject)
         {
-            UserViewModel user = userObject as UserViewModel;
-            if (user != null && user.IsValid && !Users.Contains(user))
+            if (userObject is UserViewModel user && user.IsValid && !Users.Contains(user))
             {
                 Users.Add(user);
             }

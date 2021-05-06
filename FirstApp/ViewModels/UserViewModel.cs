@@ -19,16 +19,12 @@ namespace FirstApp.ViewModels
 
         public UsersListViewModel ListViewModel
         {
-            get{
-                return lvm;
-            }
+            get => lvm;
             set
             {
-                if (lvm != value)
-                {
-                    lvm = value;
-                    OnPropertyChanged("ListViewModel");
-                }
+                if (lvm == value) return;
+                lvm = value;
+                OnPropertyChanged("ListViewModel");
             }
         }
 
@@ -69,15 +65,10 @@ namespace FirstApp.ViewModels
             }
         }
 
-        public bool IsValid
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(Name.Trim())
-                       || !string.IsNullOrEmpty(Email.Trim())
-                       || !string.IsNullOrEmpty(Phone.Trim());
-            }
-        }
+        public bool IsValid =>
+            !string.IsNullOrEmpty(Name.Trim())
+            || !string.IsNullOrEmpty(Email.Trim())
+            || !string.IsNullOrEmpty(Phone.Trim());
 
         protected void OnPropertyChanged(string propertyName = null)
         {

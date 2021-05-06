@@ -5,11 +5,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using FirstApp.Annotations;
+using FirstApp.Views;
 using Xamarin.Forms;
 
 namespace FirstApp.ViewModels
 {
-    class LoginViewModel:INotifyPropertyChanged
+    public class LoginViewModel:INotifyPropertyChanged
     {
         public INavigation Navigation { get; set; }
         public ICommand LoginCommand { protected set; get; }
@@ -23,9 +24,10 @@ namespace FirstApp.ViewModels
             BackCommand = new Command(Back);
         }
 
-        private void Login()
+        async void Login()
         {
-
+            var vm = new MainViewModel {LoginViewModel = this};
+            await Navigation.PushModalAsync(new MainPage(vm));
         }
         private void Register()
         {

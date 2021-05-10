@@ -9,6 +9,7 @@
         <StackLayout BackgroundColor="White">
             <Label
                 Margin="40,20,20,0"
+                FontFamily="Open Sans"
                 FontSize="Title"
                 Text="Мои курсы:"
                 TextColor="Black" />
@@ -36,18 +37,25 @@
                                     </StackLayout>
                                     <StackLayout Margin="5,0,0,60" VerticalOptions="End">
                                         <Label
+                                            FontFamily="Open Sans"
                                             FontSize="Title"
                                             Text="{Binding Title}"
                                             TextColor="White" />
                                     </StackLayout>
                                     <StackLayout Margin="5,0,0,5" VerticalOptions="End">
                                         <Label
+                                            FontFamily="Open Sans"
                                             FontSize="Caption"
                                             Text="{Binding Description}"
                                             TextColor="White" />
                                     </StackLayout>
-
-
+                                    <!--  кнопка открытия курса  -->
+                                    <Button
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding OpenPage}"
+                                        CommandParameter="{Binding SelectedCourse}"
+                                        FontFamily="Open Sans"
+                                        Text=" " />
                                 </Grid>
                             </Frame>
                         </StackLayout>
@@ -72,6 +80,7 @@
                         Margin="10"
                         BackgroundColor="#5098CC"
                         CornerRadius="10"
+                        FontFamily="Open Sans"
                         HeightRequest="100"
                         Text="Статистика"
                         TextColor="White"
@@ -83,8 +92,9 @@
                         Margin="10"
                         BackgroundColor="#5098CC"
                         CornerRadius="10"
+                        FontFamily="Open Sans"
                         HeightRequest="100"
-                        Text="Выйти"
+                        Text="Поделиться"
                         TextColor="White"
                         WidthRequest=" 100" />
 
@@ -94,8 +104,9 @@
                         Margin="10"
                         BackgroundColor="#5098CC"
                         CornerRadius="10"
+                        FontFamily="Open Sans"
                         HeightRequest="100"
-                        Text="Статистика"
+                        Text="Обратная связь"
                         TextColor="White"
                         WidthRequest=" 100" />
 
@@ -105,11 +116,20 @@
                         Margin="10"
                         BackgroundColor="#5098CC"
                         CornerRadius="10"
+                        FontFamily="Open Sans"
                         HeightRequest="100"
                         Text="Выйти"
                         TextColor="White"
                         WidthRequest=" 100" />
                 </Grid>
+                <Button
+                    Margin="40,10,40,0"
+                    BackgroundColor="#5098CC"
+                    CornerRadius="10"
+                    HeightRequest="70"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Выйти"
+                    WidthRequest="350" />
             </StackLayout>
         </StackLayout>
 

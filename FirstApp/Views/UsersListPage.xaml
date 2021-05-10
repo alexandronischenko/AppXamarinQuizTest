@@ -1,21 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FirstApp.Views.UsersListPage" Title="Список пользователей" BackgroundColor="WhiteSmoke">
+<ContentPage
+    x:Class="FirstApp.Views.UsersListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Список пользователей"
+    BackgroundColor="WhiteSmoke">
     <StackLayout>
-        <Button Text="Добавить" BackgroundColor="DodgerBlue" BorderRadius="10" 
-                Margin="30, 50" Padding="0, 0, 0, 0" Command="{Binding CreateUserCommand}"></Button>
-        <ListView x:Name="booksList" ItemsSource="{Binding Users}"
-                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}" HasUnevenRows="True">
+        <Button
+            Margin="30,50"
+            Padding="0,0,0,0"
+            BackgroundColor="DodgerBlue"
+            BorderRadius="10"
+            Command="{Binding CreateUserCommand}"
+            Text="Добавить" />
+        <ListView
+            x:Name="booksList"
+            HasUnevenRows="True"
+            ItemsSource="{Binding Users}"
+            SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout Padding="10">
-                                <Label Text="{Binding Name}" FontSize="Medium" TextColor="Black"></Label>
-                                <Label Text="{Binding Email}" FontSize="Small" TextColor="Black"></Label>
-                                <Label Text="{Binding Phone}" FontSize="Small" TextColor="Black"></Label>
-                                <Button Text="Удалить" Command="{Binding ListViewModel.DeleteUserCommand}" CommandParameter="{Binding }" BackgroundColor="DodgerBlue" ></Button>
+                                <Label
+                                    FontSize="Medium"
+                                    Text="{Binding Name}"
+                                    TextColor="Black" />
+                                <Label
+                                    FontSize="Small"
+                                    Text="{Binding Email}"
+                                    TextColor="Black" />
+                                <Label
+                                    FontSize="Small"
+                                    Text="{Binding Phone}"
+                                    TextColor="Black" />
+                                <Button
+                                    BackgroundColor="DodgerBlue"
+                                    Command="{Binding ListViewModel.DeleteUserCommand}"
+                                    CommandParameter="{Binding}"
+                                    Text="Удалить" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>

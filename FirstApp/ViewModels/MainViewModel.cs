@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using FirstApp.Annotations;
 using FirstApp.Models;
+using Xamarin.Forms;
 
 namespace FirstApp.ViewModels
 {
@@ -12,7 +14,8 @@ namespace FirstApp.ViewModels
         public LoginViewModel LoginViewModel { get; set; }
 
         private ObservableCollection<Course> _courses;
-
+        public INavigation Navigation { get; set; }
+        public ICommand OpenCourseCommand { get; protected set; }
         public ObservableCollection<Course> Courses
         {
             get { return _courses; }
@@ -25,8 +28,24 @@ namespace FirstApp.ViewModels
 
         public MainViewModel()
         {
+            OpenCourseCommand = new Command(OpenCourse);
             Courses = new ObservableCollection<Course>();
             AddData();
+        }
+
+        private Course _selectedCourse;
+        public Course SelectedCourse
+        {
+            get { return _selectedCourse; }
+            set
+            {
+                _selectedCourse = value;
+                OnPropertyChanged("SelectedCourse");
+            }
+        }
+        private void OpenCourse(object obj)
+        {
+            //Navigation.PushAsync(CoursesPage(obj));
         }
 
         private void AddData()

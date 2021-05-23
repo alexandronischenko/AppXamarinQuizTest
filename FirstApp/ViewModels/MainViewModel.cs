@@ -48,6 +48,8 @@ namespace FirstApp.ViewModels
             }
         }
 
+        public User User { get; set; }
+
         async void Exit()
         {
             await Navigation.PopToRootAsync(true);

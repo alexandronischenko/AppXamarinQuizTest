@@ -14,7 +14,6 @@ namespace FirstApp.Views
     {
         public LoginPage()
         {
-            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
 
             BindingContext = new LoginViewModel { Navigation = this.Navigation };

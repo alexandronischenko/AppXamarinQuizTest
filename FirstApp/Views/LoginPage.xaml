@@ -3,7 +3,12 @@
     x:Class="FirstApp.Views.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="#5999CA">
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
+    d:DataContext="{x:Static viewModel:LoginViewModel.Instance}"
+    BackgroundColor="#5999CA"
+    mc:Ignorable="d">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="textColor">#1177C1</Color>
@@ -78,6 +83,7 @@
                                         HorizontalOptions="FillAndExpand"
                                         Placeholder="Email"
                                         PlaceholderColor="DarkGray"
+                                        Text="{Binding UserLogin}"
                                         TextColor="#5098CC" />
                                 </StackLayout>
                             </Frame>
@@ -110,6 +116,7 @@
                                         IsPassword="True"
                                         Placeholder="Password"
                                         PlaceholderColor="DarkGray"
+                                        Text="{Binding UserPassword}"
                                         TextColor="#5098CC" />
                                 </StackLayout>
                             </Frame>
@@ -135,12 +142,27 @@
 
                             </StackLayout>
                             <!--  кнопка войти  -->
-                            <Button
-                                BackgroundColor="#5098CC"
-                                Command="{Binding LoginCommand}"
-                                CornerRadius="30"
-                                Text="SIGN IN"
-                                TextColor="White" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    BackgroundColor="#5098CC"
+                                    Command="{Binding LoginCommand}"
+                                    CornerRadius="30"
+                                    HorizontalOptions="Fill"
+                                    Text="Войти"
+                                    TextColor="White" />
+                                <Button
+                                    Grid.Column="1"
+                                    BackgroundColor="#5098CC"
+                                    Command="{Binding RegisterCommand}"
+                                    CornerRadius="30"
+                                    HorizontalOptions="Fill"
+                                    Text="Зарегистрироваться"
+                                    TextColor="White" />
+                            </Grid>
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                 <Label
                                     FontSize="Small"

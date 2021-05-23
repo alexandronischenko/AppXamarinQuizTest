@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:FirstApp.Models;assembly=FirstApp"
     xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
-    Title="Привет!"
+    Title="{Binding User.Login, StringFormat=Привет {0}}"
     d:DataContext="{x:Static viewModel:MainViewModel.Instance}"
     mc:Ignorable="d">
 

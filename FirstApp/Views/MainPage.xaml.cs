@@ -5,14 +5,14 @@ namespace FirstApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage() : this(null)
+        {
+        }
+
+        public MainPage(MainViewModel mvm)
         {
             InitializeComponent();
-
-            MainViewModel mvm = new MainViewModel
-            {
-                Navigation = Navigation
-            };
+            mvm.Navigation = Navigation;
             BindingContext = mvm;
         }
     }

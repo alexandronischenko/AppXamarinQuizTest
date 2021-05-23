@@ -31,7 +31,7 @@ namespace FirstApp.ViewModels
         }
         private void Register()
         {
-
+            //klhjhk
         }
         private void Back()
         {

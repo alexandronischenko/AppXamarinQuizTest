@@ -10,8 +10,8 @@ namespace FirstApp.Models
 {
     public class Poll : INotifyPropertyChanged
     {
-        private static ObservableCollection<Question> _questions;
-        private static int _numberOfQuestions;
+        private ObservableCollection<Question> _questions;
+        private int _numberOfQuestions;
         private int _result;
 
         public Poll(ObservableCollection<Question> questions)
@@ -48,6 +48,8 @@ namespace FirstApp.Models
                 OnPropertyChanged();
             }
         }
+
+        public override string ToString() => Questions.Count.ToString();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

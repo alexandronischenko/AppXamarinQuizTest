@@ -6,13 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:FirstApp.Models;assembly=FirstApp"
+    xmlns:system="clr-namespace:System;assembly=netstandard"
     xmlns:userControl="clr-namespace:FirstApp.UserControl;assembly=FirstApp"
     xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
     d:DataContext="{x:Static viewModel:CourseViewModel.Instance}"
     mc:Ignorable="d">
     <ContentPage.Content>
 
-        <ScrollView Margin="10">
+        <StackLayout Margin="10">
+
             <StackLayout>
                 <Label
                     HorizontalOptions="CenterAndExpand"
@@ -56,28 +58,30 @@
                                         <RadioButton
                                             Grid.Row="0"
                                             Grid.Column="0"
-                                            GroupName="{Binding BindingContext.QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
-                                            Text="{Binding Answers[0]}" />
+                                            GroupName="{Binding Path=QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
+                                            IsChecked="{Binding Answers[0].IsChecked}" />
                                         <RadioButton
                                             Grid.Row="1"
                                             Grid.Column="0"
-                                            GroupName="{Binding BindingContext.QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" />
+                                            GroupName="{Binding Path=QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
+                                            IsChecked="{Binding Answers[1].IsChecked}" />
                                         <RadioButton
                                             Grid.Row="2"
                                             Grid.Column="0"
-                                            GroupName="{Binding BindingContext.QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" />
+                                            GroupName="{Binding Path=QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
+                                            IsChecked="{Binding Answers[2].IsChecked}" />
                                         <Label
                                             Grid.Row="0"
                                             Grid.Column="1"
-                                            Text="{Binding Answers[0]}" />
+                                            Text="{Binding Answers[0].Item}" />
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="1"
-                                            Text="{Binding Answers[1]}" />
+                                            Text="{Binding Answers[1].Item}" />
                                         <Label
                                             Grid.Row="2"
                                             Grid.Column="1"
-                                            Text="{Binding Answers[2]}" />
+                                            Text="{Binding Answers[2].Item}" />
 
                                     </Grid>
                                 </StackLayout>
@@ -85,8 +89,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button Command="{Binding CheckAnswersCommand}" Text="Проверка" />
             </StackLayout>
-        </ScrollView>
+        </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>

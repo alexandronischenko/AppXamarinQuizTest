@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using FirstApp.Annotations;
 
@@ -9,12 +10,12 @@ namespace FirstApp.Models
     {
         private string _questionDescription;
         private string _correctAnswer;
-        private ObservableCollection<string> _answers;
+        private ObservableCollection<StringCheckedItem> _answers;
 
         public Question(string questionDescription, ObservableCollection<string> answers, string correctAnswer)
         {
             QuestionDescription = questionDescription;
-            Answers = answers;
+            Answers = new ObservableCollection<StringCheckedItem>(answers.Select(x => new StringCheckedItem { Item = x }));
             CorrectAnswer = correctAnswer;
         }
 
@@ -28,7 +29,7 @@ namespace FirstApp.Models
             }
         }
 
-        public ObservableCollection<string> Answers
+        public ObservableCollection<StringCheckedItem> Answers
         {
             get => _answers;
             set
@@ -37,8 +38,6 @@ namespace FirstApp.Models
                 OnPropertyChanged(nameof(Answers));
             }
         }
-
-        
 
         public string CorrectAnswer
         {
@@ -59,30 +58,45 @@ namespace FirstApp.Models
         }
     }
 
-    public class Answer : INotifyPropertyChanged
+    public class Notifier : INotifyPropertyChanged
     {
-        private string _someAnswer;
+
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public Answer(string someAnswer)
-        {
-            SomeAnswer = someAnswer;
-        }
-        public string SomeAnswer 
-        {
-            get => _someAnswer;
-            set
-
-            {
-                _someAnswer = value;
-                OnPropertyChanged(nameof(SomeAnswer));
-            }
-        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class StringCheckedItem : CheckedItem<string>
+    {
+    }
+
+    public class CheckedItem<T> : Notifier
+    {
+        private T _item;
+        private bool _isChecked;
+
+        public T Item
+        {
+            get => _item;
+            set
+            {
+                _item = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

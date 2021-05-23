@@ -34,7 +34,6 @@ namespace FirstApp.ViewModels
         {
             OpenCourseCommand = new Command(OpenCourse);
             ExitCommand = new Command(Exit);
-            Courses = new ObservableCollection<Course>();
             AddData();
         }
 
@@ -56,58 +55,65 @@ namespace FirstApp.ViewModels
         async void OpenCourse()
         {
             //await Application.Current.MainPage.Navigation.PushModalAsync(new CoursePage(new CourseViewModel(SelectedCourse)));
-            await Navigation.PushModalAsync(new CoursePage(new CourseViewModel(SelectedCourse)));
+            await Navigation.PushModalAsync(new CoursePage(new CourseViewModel(SelectedCourse){Navigation = Navigation}));
         }
 
         private void AddData()
         {
-            Courses.Add(new Course
+            var q1 = new Question[]
             {
-                Id = 0,
-                Title = "Тест: как хорошо ты знаешь Шерлока Холмса?",
-                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
-                ImagePath = "test1.jpeg",
-                Lecture = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
-                Poll = new Poll(new ObservableCollection<Question>
+                new Question("Что король подарил Шерлоку Холмсу за раскрытие дела в «Скандале в Богемии»?", new ObservableCollection<string> { ("Изумрудное кольцо"), ("Фотографию"), ("Персидские туфли")},"Фотографию"),
+                new Question("Сколько было зернышек апельсина в одноименном рассказе?", new ObservableCollection<string> {("2"),("5"),("7")}, "2"),
+                new Question("Какой из этих сюжетов не был экранизирован в сериале с Бенедиктом Камбербэтчем?", new ObservableCollection<string> { ("«Пестрая лента»"), ("«Этюд в багровых тонах»"), ("«Шесть Наполеонов»")}, "«Пестрая лента»"),
+                new Question("Что из этого не делает «книжный» Шерлок Холмс?", new ObservableCollection<string> { ("Не говорит «Элементарно, Ватсон»"), ("Не курит трубку"), ("Не носит шляпу") }, "Не говорит «Элементарно, Ватсон»"),
+                new Question("Что король подарил Шерлоку Холмсу за раскрытие дела в «Скандале в Богемии»?", new ObservableCollection<string> { ("Изумрудное кольцо"), ("Фотографию"), ("Персидские туфли")},"Фотографию"),
+                new Question("Сколько было зернышек апельсина в одноименном рассказе?", new ObservableCollection<string> {("2"),("5"),("7")}, "2"),
+                new Question("Какой из этих сюжетов не был экранизирован в сериале с Бенедиктом Камбербэтчем?", new ObservableCollection<string> { ("«Пестрая лента»"), ("«Этюд в багровых тонах»"), ("«Шесть Наполеонов»")}, "«Пестрая лента»"),
+                new Question("Что из этого не делает «книжный» Шерлок Холмс?", new ObservableCollection<string> { ("Не говорит «Элементарно, Ватсон»"), ("Не курит трубку"), ("Не носит шляпу") }, "Не курит трубку")
+            };
+            var items = new Course[]
+            {
+                new Course
                 {
-                    new Question("Что король подарил Шерлоку Холмсу за раскрытие дела в «Скандале в Богемии»?", new ObservableCollection<string> { ("Изумрудное кольцо"), ("Фотографию"), ("Персидские туфли")},"1"),
-                    new Question("Сколько было зернышек апельсина в одноименном рассказе?", new ObservableCollection<string> {("2"),("5"),("7")}, "2"),
-                    new Question("Какой из этих сюжетов не был экранизирован в сериале с Бенедиктом Камбербэтчем?", new ObservableCollection<string> { ("«Пестрая лента»"), ("«Этюд в багровых тонах»"), ("«Шесть Наполеонов»")}, "0"),
-                    new Question("Что из этого не делает «книжный» Шерлок Холмс?", new ObservableCollection<string> { ("Не говорит «Элементарно, Ватсон»"), ("Не курит трубку"), ("Не носит шляпу") }, "0"),
-                    new Question("Что король подарил Шерлоку Холмсу за раскрытие дела в «Скандале в Богемии»?", new ObservableCollection<string> { ("Изумрудное кольцо"), ("Фотографию"), ("Персидские туфли")},"1"),
-                    new Question("Сколько было зернышек апельсина в одноименном рассказе?", new ObservableCollection<string> {("2"),("5"),("7")}, "2"),
-                    new Question("Какой из этих сюжетов не был экранизирован в сериале с Бенедиктом Камбербэтчем?", new ObservableCollection<string> { ("«Пестрая лента»"), ("«Этюд в багровых тонах»"), ("«Шесть Наполеонов»")}, "0"),
-                    new Question("Что из этого не делает «книжный» Шерлок Холмс?", new ObservableCollection<string> { ("Не говорит «Элементарно, Ватсон»"), ("Не курит трубку"), ("Не носит шляпу") }, "0")
-                })
-            });
-            Courses.Add(new Course
-            {
-                Id = 0,
-                Title = "Курс 2",
-                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
-                ImagePath = "test2.jpeg",
-                Lecture = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
-                Poll = new Poll(new ObservableCollection<Question>
+                    Id = 0,
+                    Title = "Тест: как хорошо ты знаешь Шерлока Холмса?",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
+                    ImagePath = "test1.jpeg",
+                    Lecture = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
+                    Poll = new Poll(new ObservableCollection<Question>(q1))
+                },
+                new Course
                 {
-                    new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
-                    new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
-                    new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
-                })
-            });
-            Courses.Add(new Course
-            {
-                Id = 0,
-                Title = "Курс 3",
-                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
-                ImagePath = "test3.jpeg",
-                Lecture = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
-                Poll = new Poll(new ObservableCollection<Question>
-                {                    
-                    new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
-                    new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
-                    new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
-                })
-            });
+                    Id = 1,
+                    Title = "Курс 2",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
+                    ImagePath = "test2.jpeg",
+                    Lecture = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
+                    Poll = new Poll(new ObservableCollection<Question>
+                    {
+                        new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
+                        new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
+                        new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1")
+                    })
+                },
+                new Course
+                {
+                  Id = 2,
+                  Title = "Курс 3",
+                  Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
+                  ImagePath = "test3.jpeg",
+                  Lecture = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus.",
+                  Poll = new Poll(new ObservableCollection<Question>
+                  {
+                      new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
+                      new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
+                      new Question("Сколько",new ObservableCollection<string> {"1","2","3"},  "1"),
+                  })
+                }
+
+            };
+
+            Courses = new ObservableCollection<Course>(items);
         }
 
         [NotifyPropertyChangedInvocator]

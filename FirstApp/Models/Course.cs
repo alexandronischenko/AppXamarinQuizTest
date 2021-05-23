@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
-
-namespace FirstApp.Models
+﻿namespace FirstApp.Models
 {
     public class Course
     {
@@ -11,5 +8,7 @@ namespace FirstApp.Models
         public string ImagePath { get; set; }
         public string Lecture { get; set; }
         public Poll Poll { get; set; }
+
+        public override string ToString() => Title;
     }
 }

@@ -22,7 +22,7 @@ namespace FirstApp.ViewModels
 
         public CourseViewModel()
         {
-            
+            //
         }
         public CourseViewModel(Course course)
         {

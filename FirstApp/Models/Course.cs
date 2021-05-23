@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace FirstApp.Models
 {
@@ -8,5 +9,7 @@ namespace FirstApp.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public string Lecture { get; set; }
+        public Poll Poll { get; set; }
     }
 }

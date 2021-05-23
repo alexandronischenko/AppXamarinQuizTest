@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FirstApp.Views.CoursePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:FirstApp.Models;assembly=FirstApp"
+    xmlns:userControl="clr-namespace:FirstApp.UserControl;assembly=FirstApp"
+    xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
+    d:DataContext="{x:Static viewModel:CourseViewModel.Instance}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+
+        <ScrollView Margin="10">
+            <StackLayout>
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding Course.Title}"
+                    VerticalOptions="Start" />
+                <Label Text="{Binding Course.Lecture}" VerticalOptions="Start" />
+                <!--  листвью всех вопросов  -->
+                <ListView
+                    Margin="30"
+                    ItemsSource="{Binding Course.Poll.Questions}"
+                    RefreshControlColor="Black"
+                    RowHeight="200"
+                    SelectionMode="None"
+                    SeparatorColor="AliceBlue"
+                    SeparatorVisibility="Default">
+                    <ListView.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="RadioButton">
+                                <Setter Property="VerticalOptions" Value="Center" />
+                            </Style>
+                            <Style TargetType="Label">
+                                <Setter Property="VerticalOptions" Value="Center" />
+                            </Style>
+                        </ResourceDictionary>
+                    </ListView.Resources>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding QuestionDescription}" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <RadioButton
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            GroupName="{Binding BindingContext.QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
+                                            Text="{Binding Answers[0]}" />
+                                        <RadioButton
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            GroupName="{Binding BindingContext.QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" />
+                                        <RadioButton
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            GroupName="{Binding BindingContext.QuestionDescription, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" />
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Text="{Binding Answers[0]}" />
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Text="{Binding Answers[1]}" />
+                                        <Label
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Text="{Binding Answers[2]}" />
+
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

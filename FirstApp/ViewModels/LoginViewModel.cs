@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace FirstApp.ViewModels
 {
-    public class LoginViewModel:INotifyPropertyChanged
+    public class LoginViewModel : INotifyPropertyChanged
     {
         public INavigation Navigation { get; set; }
         public ICommand LoginCommand { protected set; get; }
@@ -20,14 +20,14 @@ namespace FirstApp.ViewModels
         public LoginViewModel()
         {
             LoginCommand = new Command(Login);
-            RegisterCommand= new Command(Register);
+            RegisterCommand = new Command(Register);
             BackCommand = new Command(Back);
         }
 
         async void Login()
         {
-            var vm = new MainViewModel {LoginViewModel = this};
-            await Navigation.PushModalAsync(new MainPage(vm));
+            var vm = new MainViewModel { LoginViewModel = this, Navigation = this.Navigation };
+            await Navigation.PushModalAsync(new MainPage());
         }
         private void Register()
         {
@@ -35,7 +35,7 @@ namespace FirstApp.ViewModels
         }
         private void Back()
         {
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -33,10 +33,7 @@
                         Source="logomin.jpg" />
                 </Frame>
             </StackLayout>-->
-            <StackLayout
-                Margin="15,150,15,0"
-                Padding="0"
-                HorizontalOptions="FillAndExpand">
+            <StackLayout Padding="0" VerticalOptions="Center">
                 <Frame
                     Margin="0"
                     Padding="0"

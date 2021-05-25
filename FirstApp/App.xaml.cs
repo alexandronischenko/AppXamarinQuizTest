@@ -26,7 +26,8 @@ namespace FirstApp
         }
         public App()
         {
-            
+            NavigationPage.SetHasNavigationBar(this, false);
+
             InitializeComponent();
 
             MainPage = new NavigationPage(new LoginPage());

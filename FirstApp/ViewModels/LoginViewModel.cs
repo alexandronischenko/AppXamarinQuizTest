@@ -19,7 +19,6 @@ namespace FirstApp.ViewModels
         public INavigation Navigation { get; set; }
         public ICommand LoginCommand { protected set; get; }
         public ICommand RegisterCommand { protected set; get; }
-        public ICommand BackCommand { protected set; get; }
         public static LoginViewModel Instance => new LoginViewModel();
 
 
@@ -27,15 +26,14 @@ namespace FirstApp.ViewModels
         {
             LoginCommand = new Command(Login);
             RegisterCommand = new Command(Register);
-            BackCommand = new Command(Back);
         }
 
         async void Login()
         {
-            var user = App.Database.GetItems().FirstOrDefault(x => x.Login == UserLogin && x.Password == UserPassword);
+            var user = App.UserDatabase.GetItems().FirstOrDefault(x => x.Login == UserLogin && x.Password == UserPassword);
             if (user != null)
             {
-                var vm = new MainViewModel { LoginViewModel = this, Navigation = this.Navigation, User = user };
+                var vm = new MainViewModel { LoginViewModel = this, Navigation = this.Navigation, User = user};
                 await Navigation.PushModalAsync(new MainPage(vm));
             }
             else
@@ -46,7 +44,11 @@ namespace FirstApp.ViewModels
         }
         private async void Register()
         {
-            var isUserExists = App.Database.GetItems().Any(x => x.Login == UserLogin);
+            if (!IsValid)
+            {
+                return;
+            }
+            var isUserExists = App.UserDatabase.GetItems().Any(x => x.Login == UserLogin);
 
             if (isUserExists)
             {
@@ -55,15 +57,15 @@ namespace FirstApp.ViewModels
                 return;
             }
 
-            var result = App.Database.SaveItem(new User { Login = UserLogin, Password = UserPassword });
+            var result = App.UserDatabase.SaveItem(new User { Login = UserLogin, Password = UserPassword });
             if (result == 1)
                 await Application.Current.MainPage.DisplayAlert("Успешно",
                     $"Пользователь зарегистрирован", "Ok");
         }
-        private void Back()
-        {
 
-        }
+        public bool IsValid =>
+            !string.IsNullOrEmpty(UserLogin.Trim())
+            || !string.IsNullOrEmpty(UserPassword.Trim());
 
         public event PropertyChangedEventHandler PropertyChanged;
 

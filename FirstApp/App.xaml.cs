@@ -10,24 +10,37 @@ namespace FirstApp
     public partial class App : Application
     {
         public const string DATABASE_NAME = "StudyDataBase.db";
-        public static UserRepository database;
-        public static UserRepository Database
+        public static UserRepository userDatabase;
+        public static UserRepository UserDatabase
         {
             get
             {
-                if (database == null)
+                if (userDatabase == null)
                 {
-                    database = new UserRepository(
+                    userDatabase = new UserRepository(
                         Path.Combine(
                             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
                 }
-                return database;
+                return userDatabase;
+            }
+        }public static CourseRepository courseDatabase;
+        public static CourseRepository CourseDatabase
+        {
+            get
+            {
+                if (courseDatabase == null)
+                {
+                    courseDatabase = new CourseRepository(
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
+                }
+                return courseDatabase;
             }
         }
+       
         public App()
         {
-            NavigationPage.SetHasNavigationBar(this, false);
-
+            NavigationPage.SetHasNavigationBar(this, true);
             InitializeComponent();
 
             MainPage = new NavigationPage(new LoginPage());

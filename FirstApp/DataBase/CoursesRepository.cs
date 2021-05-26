@@ -1,39 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using FirstApp.Models;
 using SQLite;
 
 
 namespace FirstApp.DataBase
 {
-    public class UserRepository
+    public class CourseRepository
     {
         private SQLiteConnection database;
         static object locker = new object();
-        public UserRepository(string databasePath)
+        public CourseRepository(string databasePath)
         {
             database = new SQLiteConnection(databasePath);
-            database.CreateTable<User>();
+            database.CreateTable<Course>();
         }
 
-        public IEnumerable<User> GetItems()
+        public IEnumerable<Course> GetItems()
         {
-            return database.Table<User>().ToList();
+            return database.Table<Course>().ToList();
         }
 
-        public User GetItem(int id)
+        public Course GetItem(int id)
         {
-            return database.Get<User>(id);
+            return database.Get<Course>(id);
         }
 
         public int DeleteItem(int id)
         {
             lock (locker)
             {
-                return database.Delete<User>(id);
+                return database.Delete<Course>(id);
             }
         }
 
-        public int SaveItem(User item)
+        public int SaveItem(Course item)
         {
             if (item.Id != 0)
             {

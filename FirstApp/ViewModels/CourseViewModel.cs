@@ -45,10 +45,10 @@ namespace FirstApp.ViewModels
                 resultList.Add((pollQuestion, result));
             }
 
-            var persantage = (double) resultList.Count(x => x.IsCorrect) / resultList.Count;
+            var percentage = (double) resultList.Count(x => x.IsCorrect) / resultList.Count;
 
             await Application.Current.MainPage.DisplayAlert("Результат",
-                $"Ваш результат: {persantage:P}\r\nПравильных ответов: {resultList.Count(x => x.IsCorrect)}/{resultList.Count}", "Ok");
+                $"Ваш результат: {percentage:P}\r\nПравильных ответов: {resultList.Count(x => x.IsCorrect)}/{resultList.Count}", "Ok");
 
             Back();
         }

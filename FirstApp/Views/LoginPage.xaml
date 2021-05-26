@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
+    Title="WhyULearn"
     d:DataContext="{x:Static viewModel:LoginViewModel.Instance}"
     BackgroundColor="#5999CA"
     mc:Ignorable="d">
@@ -19,7 +20,8 @@
     </ContentPage.Resources>
     <StackLayout BackgroundColor="#5999CA">
         <Grid>
-            <!--<StackLayout картинка сверху
+            <!--  картинка сверху  -->
+            <!--<StackLayout
                 Margin="0"
                 Padding="0"
                 HorizontalOptions="FillAndExpand">
@@ -33,14 +35,10 @@
                         Source="logomin.jpg" />
                 </Frame>
             </StackLayout>-->
-            <StackLayout Padding="0" VerticalOptions="Center">
-                <Frame
-                    Margin="0"
-                    Padding="0"
-                    BackgroundColor="White"
-                    HasShadow="True"
-                    HeightRequest="450"
-                    VerticalOptions="Center">
+
+            <StackLayout Margin="10,100">
+                <Frame BackgroundColor="White" HasShadow="True">
+
 
                     <StackLayout>
 
@@ -145,6 +143,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Button
+                                    AutomationId="Button"
                                     BackgroundColor="#5098CC"
                                     Command="{Binding LoginCommand}"
                                     CornerRadius="30"
@@ -153,6 +152,7 @@
                                     TextColor="White" />
                                 <Button
                                     Grid.Column="1"
+                                    AutomationId="Button"
                                     BackgroundColor="#5098CC"
                                     Command="{Binding RegisterCommand}"
                                     CornerRadius="30"

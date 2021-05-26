@@ -8,29 +8,30 @@
     xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
     Title="{Binding User.Login, StringFormat=Привет {0}}"
     d:DataContext="{x:Static viewModel:MainViewModel.Instance}"
+    BackgroundColor="White"
     mc:Ignorable="d">
 
     <ScrollView>
-        <StackLayout BackgroundColor="White">
+        <StackLayout>
             <Label
                 Margin="40,20,20,0"
-                FontFamily="Open Sans"
+                FontFamily="Nexa"
                 FontSize="Title"
-                Text="Мои курсы:"
+                Text="My courses:"
                 TextColor="Black" />
 
             <CarouselView
                 CurrentItem="{Binding SelectedCourse}"
                 HeightRequest="350"
                 ItemsSource="{Binding Courses}"
-                PeekAreaInsets="20">
+                PeekAreaInsets="20,0,20,0">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="models:Course">
                         <StackLayout Padding="0">
                             <Frame
                                 Margin="10"
                                 Padding="0"
-                                CornerRadius="10"
+                                CornerRadius="15"
                                 HasShadow="True"
                                 HeightRequest="350"
                                 WidthRequest="250">
@@ -41,14 +42,12 @@
                                             HeightRequest="350"
                                             Source="{Binding ImagePath}" />
                                     </StackLayout>
-                                    <StackLayout Margin="5,0,0,60" VerticalOptions="End">
+                                    <StackLayout Margin="5,0,0,5" VerticalOptions="End">
                                         <Label
                                             FontFamily="Open Sans"
                                             FontSize="Title"
                                             Text="{Binding Title}"
                                             TextColor="White" />
-                                    </StackLayout>
-                                    <StackLayout Margin="5,0,0,5" VerticalOptions="End">
                                         <Label
                                             FontFamily="Open Sans"
                                             FontSize="Caption"
@@ -86,7 +85,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         BackgroundColor="#5098CC"
-                        CornerRadius="10"
+                        CornerRadius="15"
                         FontFamily="Open Sans"
                         HeightRequest="100"
                         Text="Статистика"
@@ -97,7 +96,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         BackgroundColor="#5098CC"
-                        CornerRadius="10"
+                        CornerRadius="15"
                         FontFamily="Open Sans"
                         HeightRequest="100"
                         Text="Поделиться"
@@ -108,7 +107,7 @@
                         Grid.Row="1"
                         Grid.Column="0"
                         BackgroundColor="#5098CC"
-                        CornerRadius="10"
+                        CornerRadius="15"
                         FontFamily="Open Sans"
                         HeightRequest="100"
                         Text="Обратная связь"
@@ -119,7 +118,7 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         BackgroundColor="#5098CC"
-                        CornerRadius="10"
+                        CornerRadius="15"
                         FontFamily="Open Sans"
                         HeightRequest="100"
                         Text="Выйти"
@@ -131,8 +130,8 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         BackgroundColor="#5098CC"
-                        Command="{Binding ExitCommands}"
-                        CornerRadius="10"
+                        Command="{Binding ExitCommand}"
+                        CornerRadius="15"
                         HeightRequest="70"
                         HorizontalOptions="CenterAndExpand"
                         Text="Выйти"

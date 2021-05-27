@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FirstApp.Views.ResultPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:FirstApp.Models;assembly=FirstApp"
+    xmlns:viewModel="clr-namespace:FirstApp.ViewModels;assembly=FirstApp"
+    d:DataContext="{x:Static viewModel:ResultViewModel.Instance}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <Label
+                Margin="10,10,10,0"
+                FontSize="Title"
+                HorizontalOptions="StartAndExpand"
+                Text="Мои курсы:"
+                TextColor="Black"
+                VerticalOptions="Start" />
+            <ListView HasUnevenRows="True" ItemsSource="{Binding Courses}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Frame
+                                        Margin="10,5"
+                                        BorderColor="LightGray"
+                                        CornerRadius="15"
+                                        HasShadow="True">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Frame
+                                                Padding="0"
+                                                CornerRadius="100"
+                                                HorizontalOptions="Start">
+                                                <Image
+                                                    Aspect="AspectFill"
+                                                    HeightRequest="70"
+                                                    Source="{Binding ImagePath}"
+                                                    WidthRequest="70" />
+                                            </Frame>
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="Caption"
+                                                HorizontalOptions="StartAndExpand"
+                                                Text="{Binding Title}"
+                                                TextColor="Black"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <Label
+                                                Grid.Column="2"
+                                                FontSize="Default"
+                                                HorizontalOptions="StartAndExpand"
+                                                Text="{Binding ResultProperty}"
+                                                TextColor="Black"
+                                                VerticalOptions="CenterAndExpand" />
+                                        </Grid>
+                                    </Frame>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

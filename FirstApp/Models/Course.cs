@@ -13,6 +13,8 @@ namespace FirstApp.Models
         public string Lecture { get; set; }
         public Poll Poll { get; set; }
 
+        public string ResultProperty => $"{Poll.Result} / {Poll.Questions.Count}";
+
         public override string ToString() => Title;
     }
 }

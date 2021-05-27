@@ -14,12 +14,14 @@ namespace FirstApp.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        private string _name;
         public string UserLogin { get; set; } = "alex";
         public string UserPassword { get; set; } = "12345";
         public INavigation Navigation { get; set; }
         public ICommand LoginCommand { protected set; get; }
         public ICommand RegisterCommand { protected set; get; }
         public static LoginViewModel Instance => new LoginViewModel();
+        public Page page { get; set; }
 
 
         public LoginViewModel()
@@ -34,7 +36,9 @@ namespace FirstApp.ViewModels
             if (user != null)
             {
                 var vm = new MainViewModel { LoginViewModel = this, Navigation = this.Navigation, User = user};
-                await Navigation.PushModalAsync(new MainPage(vm));
+                Navigation.InsertPageBefore(new MainPage(vm), page);
+                Navigation.RemovePage(page);
+                //await Navigation.PushModalAsync(new MainPage(vm));
             }
             else
             {

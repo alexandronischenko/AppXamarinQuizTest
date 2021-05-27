@@ -19,22 +19,24 @@ namespace FirstApp.ViewModels
         public ICommand CheckAnswersCommand { protected set; get; }
         public ICommand BackCommand { protected set; get; }
         public Course Course { get; set; }
-
+        public User User { get; set; }
         public static CourseViewModel Instance => new CourseViewModel();
 
         public CourseViewModel()
         {
             //
         }
-        public CourseViewModel(Course course)
+        public CourseViewModel(Course course, User user)
         {
             CheckAnswersCommand = new Command(CheckAnswers);
             BackCommand = new Command(Back);
             Course = course;
+            User = user;
         }
 
         async void CheckAnswers()
         {
+            
             var resultList = new List<(Question Question, bool IsCorrect)>();
             foreach (var pollQuestion in Course.Poll.Questions)
             {
@@ -45,6 +47,9 @@ namespace FirstApp.ViewModels
                 resultList.Add((pollQuestion, result));
             }
 
+            Course.Poll.Result = resultList.Count(x => x.IsCorrect);
+
+            App.UserDatabase.SaveItem(User);
             var percentage = (double) resultList.Count(x => x.IsCorrect) / resultList.Count;
 
             await Application.Current.MainPage.DisplayAlert("Результат",

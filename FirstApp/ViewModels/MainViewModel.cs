@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -7,7 +8,10 @@ using FirstApp.Annotations;
 using FirstApp.Models;
 using FirstApp.Views;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace FirstApp.ViewModels
 {
@@ -18,7 +22,10 @@ namespace FirstApp.ViewModels
         private ObservableCollection<Course> _courses;
         public INavigation Navigation { get; set; }
         public ICommand OpenCourseCommand { get; protected set; }
+        public ICommand OpenSiteCommand { get; protected set; }
         public ICommand ExitCommand { get; protected set; }
+        public ICommand OpenStatisticCommand { get; protected set; }
+        public User User { get; set; }
         public ObservableCollection<Course> Courses
         {
             get { return _courses; }
@@ -28,11 +35,14 @@ namespace FirstApp.ViewModels
                 OnPropertyChanged(nameof(Courses));
             }
         }
+        public string UserProperty => $"Привет {User.Login}";
 
         public static MainViewModel Instance => new MainViewModel();
         public MainViewModel()
         {
+            OpenStatisticCommand = new Command(OpenStatistic); 
             OpenCourseCommand = new Command(OpenCourse);
+            OpenSiteCommand = new Command(OpenSite);
             ExitCommand = new Command(Exit);
             AddData();
         }
@@ -48,17 +58,35 @@ namespace FirstApp.ViewModels
             }
         }
 
-        public User User { get; set; }
 
         void Exit()
         {
-            Application.Current.Quit();
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            //Application.Current.Quit();
             //await Navigation.PopToRootAsync(true);
         }
         async void OpenCourse()
         {
-            //await Application.Current.MainPage.Navigation.PushModalAsync(new CoursePage(new CourseViewModel(SelectedCourse)));
-            await Navigation.PushModalAsync(new CoursePage(new CourseViewModel(SelectedCourse){Navigation = Navigation}));
+            await Navigation.PushModalAsync(new CoursePage(new CourseViewModel(SelectedCourse, User){Navigation = Navigation}));
+        }
+        async void OpenSite()
+        {
+            try
+            {
+                //await Browser.OpenAsync(new Uri("https://vk.com/alexandroni"), BrowserLaunchMode.External);
+                await Launcher.OpenAsync(new Uri("https://vk.com/"));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Ошибка",
+                    $"Ошибка: {ex}", "Ok");
+
+            }
+        }
+        
+        async void OpenStatistic()
+        {
+            await Navigation.PushModalAsync(new ResultPage(new ResultViewModel(Courses, User){Navigation = Navigation}));
         }
 
         private void AddData()

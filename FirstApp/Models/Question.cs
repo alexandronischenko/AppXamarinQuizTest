@@ -58,23 +58,11 @@ namespace FirstApp.Models
         }
     }
 
-    public class Notifier : INotifyPropertyChanged
-    {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
     public class StringCheckedItem : CheckedItem<string>
     {
     }
 
-    public class CheckedItem<T> : Notifier
+    public class CheckedItem<T> : INotifyPropertyChanged
     {
         private T _item;
         private bool _isChecked;
@@ -97,6 +85,14 @@ namespace FirstApp.Models
                 _isChecked = value;
                 OnPropertyChanged();
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -11,7 +11,6 @@ namespace FirstApp.Models
     public class Poll : INotifyPropertyChanged
     {
         private ObservableCollection<Question> _questions;
-        private int _numberOfQuestions;
         private int _result;
 
         public Poll(ObservableCollection<Question> questions)
@@ -35,16 +34,6 @@ namespace FirstApp.Models
             set
             {
                 _result = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int NumberOfQuestions
-        {
-            get => _numberOfQuestions;
-            set
-            {
-                _numberOfQuestions = value;
                 OnPropertyChanged();
             }
         }
